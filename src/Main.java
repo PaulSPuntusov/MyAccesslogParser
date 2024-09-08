@@ -34,8 +34,8 @@ public class Main {
             int i = 0;
             while((line = reader.readLine()) != null) {
                 str.add(new LogEntry(line));
-                //System.out.println(((LogEntry)str.get(i)).ip()+ "..."+((LogEntry)str.get(i)).ldt());
-                System.out.println(((LogEntry)str.get(i)).ip());
+                System.out.println(((LogEntry)str.get(i)).ip()+ "..."+((LogEntry)str.get(i)).ldt());
+                //System.out.println(((LogEntry)str.get(i)).ip());
                 if (line.matches(".*Mozilla.*")) {
                     ++countMozilla;
                 }

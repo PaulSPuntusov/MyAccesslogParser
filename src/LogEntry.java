@@ -9,13 +9,13 @@ import java.util.regex.Pattern;
 
 
 public class LogEntry {
-    java.util.Locale locale = Locale.UK;
+    java.util.Locale locale = Locale.US;
     public final String line;
     public final String ipAddr;
     public final LocalDateTime time;
 
     public LogEntry(String line) {
-        this(line, "", LocalDateTime.of(2000, Month.SEPTEMBER, 20, 8, 8, 11));
+        this(line, "", null);
     }
 
     public LogEntry(String line, String ipAddr, LocalDateTime time) {
@@ -43,8 +43,9 @@ public class LogEntry {
         date_time = date_time.replace("[", "");
         date_time = date_time.replace("]", "");
         date_time = date_time.replace("/", ",");
-        System.out.println(date_time);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd,MMM,yyyy:HH:mm:ss");
+        //date_time = "25,Sep,2000:20:20:20";
+        //System.out.println(date_time);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd,MMM,yyyy:HH:mm:ss",locale);
         dl = LocalDateTime.parse(date_time, formatter);
         return dl;
     }
