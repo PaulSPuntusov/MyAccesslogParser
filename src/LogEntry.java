@@ -8,17 +8,20 @@ import java.util.regex.Pattern;
 
 
 
+
 public class LogEntry {
     java.util.Locale locale = Locale.US;
     public final String line;
     public final String ipAddr;
     public final LocalDateTime time;
+    public final HttpMethod method;
 
     public LogEntry(String line) {
-        this(line, "", null);
+        this(line, "", null,null);
     }
 
-    public LogEntry(String line, String ipAddr, LocalDateTime time) {
+    public LogEntry(String line, String ipAddr, LocalDateTime time, HttpMethod method) {
+        this.method = meth();
         this.line = line;
         this.ipAddr = ip();
         this.time = ldt();
@@ -48,6 +51,21 @@ public class LogEntry {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd,MMM,yyyy:HH:mm:ss",locale);
         dl = LocalDateTime.parse(date_time, formatter);
         return dl;
+    }
+    public HttpMethod meth() {
+/*
+        Pattern p = Pattern.compile("(?<=['"])\w+");
+        Matcher m = p.matcher(this.line);
+        String str =
+        switch (m.find() ? m.group() : "Not found") {
+            case ("PUT"):
+                return HttpMethod.PUT;
+            break;
+        }
+
+ */
+        System.out.println("PUT");
+        return HttpMethod.valueOf("PUT");
     }
 
 }
