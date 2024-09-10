@@ -10,6 +10,7 @@ public enum HttpMethod {
     POST{String method(){return "POST";}},
     PUT{String method(){return "PUT";}},
     TRACE{String method(){return "TRACE";}};
+    abstract String method();
 
 
 }

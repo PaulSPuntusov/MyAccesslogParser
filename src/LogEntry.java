@@ -53,6 +53,7 @@ public class LogEntry {
         return dl;
     }
     public HttpMethod meth() {
+        String str;
 /*
         Pattern p = Pattern.compile("(?<=['"])\w+");
         Matcher m = p.matcher(this.line);
@@ -65,6 +66,7 @@ public class LogEntry {
 
  */
         System.out.println("PUT");
+        str = HttpMethod.PUT.method();
         return HttpMethod.valueOf("PUT");
     }
 
