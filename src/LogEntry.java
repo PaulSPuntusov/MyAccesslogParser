@@ -54,20 +54,12 @@ public class LogEntry {
     }
     public HttpMethod meth() {
         String str;
-/*
-        Pattern p = Pattern.compile("(?<=['"])\w+");
+        Pattern p = Pattern.compile("[\\[](.*?)[\\]]"); // нагуглил исходно такую регулярку: "[(\\[{](.*?)[)\\]}]"
         Matcher m = p.matcher(this.line);
-        String str =
-        switch (m.find() ? m.group() : "Not found") {
-            case ("PUT"):
-                return HttpMethod.PUT;
-            break;
-        }
+        str = m.find() ? m.group() : "Not found";
 
- */
-        System.out.println("PUT");
         str = HttpMethod.PUT.method();
-        return HttpMethod.valueOf("PUT");
+        return HttpMethod.PUT;
     }
 
 }
