@@ -21,8 +21,8 @@ public class LogEntry {
     }
 
     public LogEntry(String line, String ipAddr, LocalDateTime time, HttpMethod method) {
-        this.method = meth();
         this.line = line;
+        this.method = meth();
         this.ipAddr = ip();
         this.time = ldt();
     }
@@ -46,20 +46,37 @@ public class LogEntry {
         date_time = date_time.replace("[", "");
         date_time = date_time.replace("]", "");
         date_time = date_time.replace("/", ",");
-        //date_time = "25,Sep,2000:20:20:20";
-        //System.out.println(date_time);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd,MMM,yyyy:HH:mm:ss",locale);
         dl = LocalDateTime.parse(date_time, formatter);
         return dl;
     }
     public HttpMethod meth() {
         String str;
-        Pattern p = Pattern.compile("[\\[](.*?)[\\]]"); // нагуглил исходно такую регулярку: "[(\\[{](.*?)[)\\]}]"
+        Pattern p = Pattern.compile("[\"](\\S+)"); // нагуглил исходно такую регулярку: "[(\\[{](.*?)[)\\]}]"
         Matcher m = p.matcher(this.line);
         str = m.find() ? m.group() : "Not found";
-
-        str = HttpMethod.PUT.method();
-        return HttpMethod.PUT;
+        switch (m.find() ? m.group() : "Not found"){
+            case ("CONNECT"):
+               return HttpMethod.CONNECT;
+            case ("DELETE"):
+                return HttpMethod.DELETE;
+            case ("GET"):
+                return HttpMethod.GET;
+            case ("HEAD"):
+                return HttpMethod.HEAD;
+            case ("OPTIONS"):
+                return HttpMethod.OPTIONS;
+            case ("PUT"):
+                return HttpMethod.PUT;
+            case ("PATCH"):
+                return HttpMethod.PATCH;
+            case ("POST"):
+                return HttpMethod.POST;
+            case ("TRACE"):
+                return HttpMethod.POST;
+            default:
+                return HttpMethod.GET;
+        }
     }
 
 }
