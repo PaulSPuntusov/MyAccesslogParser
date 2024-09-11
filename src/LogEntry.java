@@ -81,7 +81,7 @@ public class LogEntry {
         }
     }
     public String path(){
-        Pattern p = Pattern.compile("(GET\r)"); // нагуглил исходно такую регулярку: "[(\\[{](.*?)[)\\]}]"
+        Pattern p = Pattern.compile("(\r|\n/)(\\S+)"); // нагуглил исходно такую регулярку: "[(\\[{](.*?)[)\\]}]"
         Matcher m = p.matcher(this.line);
         return m.find() ? m.group() : "Not found";
     }
