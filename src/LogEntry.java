@@ -15,16 +15,18 @@ public class LogEntry {
     public final String ipAddr;
     public final LocalDateTime time;
     public final HttpMethod method;
+    public final String path;
 
     public LogEntry(String line) {
-        this(line, "", null,null);
+        this(line, "", null,null,"");
     }
 
-    public LogEntry(String line, String ipAddr, LocalDateTime time, HttpMethod method) {
+    public LogEntry(String line, String ipAddr, LocalDateTime time, HttpMethod method, String path) {
         this.line = line;
         this.method = meth();
         this.ipAddr = ip();
         this.time = ldt();
+        this.path = path();
     }
 
 
@@ -77,6 +79,11 @@ public class LogEntry {
             default:
                 return HttpMethod.GET;
         }
+    }
+    public String path(){
+        Pattern p = Pattern.compile("(GET\r)"); // нагуглил исходно такую регулярку: "[(\\[{](.*?)[)\\]}]"
+        Matcher m = p.matcher(this.line);
+        return m.find() ? m.group() : "Not found";
     }
 
 }
