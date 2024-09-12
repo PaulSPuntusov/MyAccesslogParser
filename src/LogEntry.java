@@ -16,6 +16,7 @@ public class LogEntry {
     public final LocalDateTime time;
     public final HttpMethod method;
     public final String path;
+    public String[] parts;
 
     public LogEntry(String line) {
         this(line, "", null,null,"");
@@ -23,6 +24,7 @@ public class LogEntry {
 
     public LogEntry(String line, String ipAddr, LocalDateTime time, HttpMethod method, String path) {
         this.line = line;
+        this.parts = line.split(" ");
         this.method = meth();
         this.ipAddr = ip();
         this.time = ldt();
@@ -34,7 +36,8 @@ public class LogEntry {
     public String ip() {
         Pattern p = Pattern.compile("\\b\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\b");
         Matcher m = p.matcher(this.line);
-        return m.find() ? m.group() : "Not found";
+        return parts[0];
+        //return m.find() ? m.group() : "Not found";
     }
 
     // парсим дату_время по квадратным скабкам
@@ -52,6 +55,8 @@ public class LogEntry {
         dl = LocalDateTime.parse(date_time, formatter);
         return dl;
     }
+
+    // распарсил метод
     public HttpMethod meth() {
         String str;
         Pattern p = Pattern.compile("[\"](\\S+)"); // нагуглил исходно такую регулярку: "[(\\[{](.*?)[)\\]}]"
@@ -80,10 +85,12 @@ public class LogEntry {
                 return HttpMethod.GET;
         }
     }
+    //неудачная попытка распарсить путь
     public String path(){
         Pattern p = Pattern.compile("(\r|\n/)(\\S+)"); // нагуглил исходно такую регулярку: "[(\\[{](.*?)[)\\]}]"
         Matcher m = p.matcher(this.line);
         return m.find() ? m.group() : "Not found";
     }
+
 
 }
