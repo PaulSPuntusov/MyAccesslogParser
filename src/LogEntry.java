@@ -32,10 +32,10 @@ public class LogEntry {
     }
 
 
-    // парсим IP
+    // парсим IP реализован вариант и с регуляркой и просто чтение строки о словам
     public String ip() {
-        Pattern p = Pattern.compile("\\b\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\b");
-        Matcher m = p.matcher(this.line);
+        // Pattern p = Pattern.compile("\\b\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\b");
+        // Matcher m = p.matcher(this.line);
         return parts[0];
         //return m.find() ? m.group() : "Not found";
     }
@@ -87,9 +87,10 @@ public class LogEntry {
     }
     //неудачная попытка распарсить путь
     public String path(){
-        Pattern p = Pattern.compile("(\r|\n/)(\\S+)"); // нагуглил исходно такую регулярку: "[(\\[{](.*?)[)\\]}]"
-        Matcher m = p.matcher(this.line);
-        return m.find() ? m.group() : "Not found";
+        //Pattern p = Pattern.compile("(\r|\n/)(\\S+)"); // нагуглил исходно такую регулярку: "[(\\[{](.*?)[)\\]}]"
+        //Matcher m = p.matcher(this.line);
+        //return m.find() ? m.group() : "Not found";
+        return parts[6];
     }
 
 
