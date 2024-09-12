@@ -89,7 +89,8 @@ public class LogEntry {
     }
     //неудачная попытка распарсить путь
     public String path(){
-        return parts[6];
+        String str = parts[10]+parts[6];
+        return str;
     }
     public int responseCode(){
         return parseInt(parts[8]);
