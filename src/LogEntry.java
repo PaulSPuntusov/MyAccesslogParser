@@ -1,12 +1,10 @@
 import java.time.LocalDateTime;
-import java.time.Month;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-
-
+import static java.lang.Integer.parseInt;
 
 
 public class LogEntry {
@@ -16,15 +14,19 @@ public class LogEntry {
     public final LocalDateTime time;
     public final HttpMethod method;
     public final String path;
-    public String[] parts;
+    public  final int responseCode;
+    public final String referer;
+    public final String[] parts;
 
     public LogEntry(String line) {
-        this(line, "", null,null,"");
+        this(line, "", null,null,"", 0, "");
     }
 
-    public LogEntry(String line, String ipAddr, LocalDateTime time, HttpMethod method, String path) {
+    public LogEntry(String line, String ipAddr, LocalDateTime time, HttpMethod method, String path, int responseCode, String referer) {
         this.line = line;
         this.parts = line.split(" ");
+        this.referer = referer();
+        this.responseCode = responseCode();
         this.method = meth();
         this.ipAddr = ip();
         this.time = ldt();
@@ -87,10 +89,13 @@ public class LogEntry {
     }
     //неудачная попытка распарсить путь
     public String path(){
-        //Pattern p = Pattern.compile("(\r|\n/)(\\S+)"); // нагуглил исходно такую регулярку: "[(\\[{](.*?)[)\\]}]"
-        //Matcher m = p.matcher(this.line);
-        //return m.find() ? m.group() : "Not found";
         return parts[6];
+    }
+    public int responseCode(){
+        return parseInt(parts[8]);
+    }
+    public String referer(){
+        return parts[9];
     }
 
 

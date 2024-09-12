@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 public class Main {
     static ArrayList<LogEntry> str = new ArrayList();
+
     public static void main(String[] args) throws IOException {
         String path = "C:\\Users\\pps_r\\IdeaProjects\\AccessLogParser\\access.log";
         File file = new File(path);
@@ -32,10 +33,14 @@ public class Main {
             int countYandexbot = 0;
             int length = 0;
             int i = 0;
-            while((line = reader.readLine()) != null) {
+            while ((line = reader.readLine()) != null) {
                 str.add(new LogEntry(line));
-                System.out.println(((LogEntry)str.get(i)).ip()+ "..."+((LogEntry)str.get(i)).ldt()+"***"+
-                        ((LogEntry)str.get(i)).meth()+"$$$"+((LogEntry)str.get(i)).path());
+                System.out.println(((LogEntry) str.get(i)).ip() +
+                        "..." + ((LogEntry) str.get(i)).ldt() +
+                        "..." + ((LogEntry) str.get(i)).meth() +
+                        "..." + ((LogEntry) str.get(i)).path() +
+                        "..." + ((LogEntry) str.get(i)).responseCode() +
+                        "..." + ((LogEntry)str.get(i)).referer());
 
                 if (line.matches(".*Mozilla.*")) {
                     ++countMozilla;
