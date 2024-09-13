@@ -17,14 +17,16 @@ public class LogEntry {
     public  final int responseCode;
     public final String referer;
     public final String[] parts;
+    public final UserAgent userAgent;
 
     public LogEntry(String line) {
-        this(line, "", null,null,"", 0, "");
+        this(line, "", null,null,"", 0, "", null);
     }
 
-    public LogEntry(String line, String ipAddr, LocalDateTime time, HttpMethod method, String path, int responseCode, String referer) {
+    public LogEntry(String line, String ipAddr, LocalDateTime time, HttpMethod method, String path, int responseCode, String referer, UserAgent userAgent) {
         this.line = line;
         this.parts = line.split(" ");
+        this.userAgent = userAgent();
         this.referer = referer();
         this.responseCode = responseCode();
         this.method = meth();
@@ -98,6 +100,14 @@ public class LogEntry {
     public String referer(){
         return parts[9];
     }
+
+    public UserAgent userAgent(){
+        UserAgent ua = new UserAgent(this.line);
+        System.out.println(ua.getOs());
+        System.out.println(ua.getBrowser());
+        return ua;
+    }
+
 
 
 }
