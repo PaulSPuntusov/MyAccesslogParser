@@ -24,10 +24,37 @@ public class UserAgent {
     }
     public String Browser(){
         String str;
-        Pattern p = Pattern.compile("(?=((Edge)|(Firefox)|(Chrome)|(Opera)))"); // нагуглил исходно такую регулярку: "[(\\[{](.*?)[)\\]}]"
+        Pattern p = Pattern.compile("Mozilla"); // нагуглил исходно такую регулярку: "[(\\[{](.*?)[)\\]}]"
         Matcher m = p.matcher(this.line);
         str = m.find() ? m.group() : "Not found";
         return str;
+        /*
+        switch (m.find() ? m.group() : "Not found"){
+            case("Mozilla"): {
+                str = "Mozilla";
+                return str;
+            }
+            case("Edge"): {
+                str = "Edge";
+                return str;
+            }
+            case("Firefox"): {
+                    str = "Firefox";
+                    return str;
+            }
+            case("Chrome"): {
+                str = "Chrome";
+                return str;
+            }
+            case("Opera"): {
+                str = "Opera";
+                return str;
+            }
+            default:
+                return str = m.find() ? m.group() : "Not found";
+        }
+
+         */
     }
 
     public String getBrowser() {
