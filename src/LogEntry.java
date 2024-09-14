@@ -103,8 +103,8 @@ public class LogEntry {
 
     public UserAgent userAgent(){
         UserAgent ua = new UserAgent(this.line);
-        System.out.println(ua.getOs());
-        System.out.println(ua.getBrowser());
+        //System.out.println(ua.getOs());
+        //System.out.println(ua.getBrowser());
         return ua;
     }
 

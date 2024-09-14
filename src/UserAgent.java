@@ -17,14 +17,14 @@ public class UserAgent {
     }
     public String Os(){
         String str;
-        Pattern p = Pattern.compile("(?=Linux|Mac OS|Windows)"); // нагуглил исходно такую регулярку: "[(\\[{](.*?)[)\\]}]"
+        Pattern p = Pattern.compile("(?=((Linux)|(Mac OS)|(Windows)))"); // нагуглил исходно такую регулярку: "[(\\[{](.*?)[)\\]}]"
         Matcher m = p.matcher(this.line);
         str = m.find() ? m.group() : "Not found";
         return str;
     }
     public String Browser(){
         String str;
-        Pattern p = Pattern.compile("(?=Edge|Firefox|Chrome|Opera)"); // нагуглил исходно такую регулярку: "[(\\[{](.*?)[)\\]}]"
+        Pattern p = Pattern.compile("(?=((Edge)|(Firefox)|(Chrome)|(Opera)))"); // нагуглил исходно такую регулярку: "[(\\[{](.*?)[)\\]}]"
         Matcher m = p.matcher(this.line);
         str = m.find() ? m.group() : "Not found";
         return str;
