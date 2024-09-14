@@ -45,19 +45,22 @@ public class UserAgent {
         if (line.matches(".*Opera.*")) {
             strBrowser = "Opera";
         }
+        if (line.matches(".*Safari.*")) {
+            strBrowser = "Safari";
+        }
+        if (line.matches(".*bot.*")) {
+            strBrowser = "bot";
+        }
+        if (line.matches(".*Bot.*")) {
+            strBrowser = "bot";
+        }
+        if (line.matches(".*curl.*")) {
+            strBrowser = "library";
+        }
+        if (line.matches(".*Postman.*")) {
+            strBrowser = "net_tool";
+        }
         return strBrowser;
-    }
-
-    public String getBrowser() {
-        return browser;
-    }
-
-    public String getOs() {
-        return os;
-    }
-
-    public void setLine(String line) {
-        this.line = line;
     }
 
     @Override
