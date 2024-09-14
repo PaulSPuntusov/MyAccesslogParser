@@ -7,54 +7,45 @@ public class UserAgent {
     public String os;
 
 
-    public UserAgent(String line){
-        this(line,"","");
+    public UserAgent(String line) {
+        this(line, "", "");
     }
-    public UserAgent(String line,String browser, String os ) {
+
+    public UserAgent(String line, String browser, String os) {
         this.line = line;
         this.browser = Browser();
         this.os = Os();
     }
-    public String Os(){
-        String str;
-        Pattern p = Pattern.compile("(?=((Linux)|(Mac OS)|(Windows)))"); // нагуглил исходно такую регулярку: "[(\\[{](.*?)[)\\]}]"
-        Matcher m = p.matcher(this.line);
-        str = m.find() ? m.group() : "Not found";
-        return str;
-    }
-    public String Browser(){
-        String str;
-        Pattern p = Pattern.compile("Mozilla"); // нагуглил исходно такую регулярку: "[(\\[{](.*?)[)\\]}]"
-        Matcher m = p.matcher(this.line);
-        str = m.find() ? m.group() : "Not found";
-        return str;
-        /*
-        switch (m.find() ? m.group() : "Not found"){
-            case("Mozilla"): {
-                str = "Mozilla";
-                return str;
-            }
-            case("Edge"): {
-                str = "Edge";
-                return str;
-            }
-            case("Firefox"): {
-                    str = "Firefox";
-                    return str;
-            }
-            case("Chrome"): {
-                str = "Chrome";
-                return str;
-            }
-            case("Opera"): {
-                str = "Opera";
-                return str;
-            }
-            default:
-                return str = m.find() ? m.group() : "Not found";
-        }
 
-         */
+    public String Os() {
+        String strOs = "нет";
+        if (line.matches(".*Linux.*")) {
+            strOs = "Linux";
+        }
+        if (line.matches(".*Mac OS.*")) {
+            strOs = "Mac Os";
+        }
+        if (line.matches(".*Windows.*")) {
+            strOs = "Windows";
+        }
+        return strOs;
+    }
+
+    public String Browser() {
+        String strBrowser = "нет";
+        if (line.matches(".*Edge.*")) {
+            strBrowser = "Edge";
+        }
+        if (line.matches(".*Firefox.*")) {
+            strBrowser = "Firefox";
+        }
+        if (line.matches(".*Chrome.*")) {
+            strBrowser = "Chrome";
+        }
+        if (line.matches(".*Opera.*")) {
+            strBrowser = "Opera";
+        }
+        return strBrowser;
     }
 
     public String getBrowser() {

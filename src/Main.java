@@ -40,8 +40,8 @@ public class Main {
                         "..." + ((LogEntry) str.get(i)).meth() +
                         "..." + ((LogEntry) str.get(i)).path() +
                         "..." + ((LogEntry) str.get(i)).responseCode() +
-                        "..." + ((LogEntry)str.get(i)).referer()+
-                        "..." + ((LogEntry)str.get(i)).userAgent());
+                        "..." + ((LogEntry) str.get(i)).referer()+
+                        "..." + ((LogEntry) str.get(i)).userAgent());
 
                 if (line.matches(".*Mozilla.*")) {
                     ++countMozilla;

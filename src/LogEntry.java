@@ -38,13 +38,13 @@ public class LogEntry {
 
     // парсим IP реализован вариант и с регуляркой и просто чтение строки о словам
     public String ip() {
-        // Pattern p = Pattern.compile("\\b\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\b");
-        // Matcher m = p.matcher(this.line);
-        return parts[0];
-        //return m.find() ? m.group() : "Not found";
+         Pattern p = Pattern.compile("\\b\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\b");
+         Matcher m = p.matcher(this.line);
+        // return parts[0];
+        return m.find() ? m.group() : "Not found";
     }
 
-    // парсим дату_время по квадратным скабкам
+    // парсим дату_время по квадратным скобкам
     public LocalDateTime ldt() {
         String date_time;
         LocalDateTime dl;
