@@ -8,16 +8,16 @@ import static java.lang.Integer.parseInt;
 
 
 public class LogEntry {
-    java.util.Locale locale = Locale.US;
-    public final String line;
-    public final String ipAddr;
-    public final LocalDateTime time;
-    public final HttpMethod method;
-    public final String path;
-    public  final int responseCode;
-    public final String referer;
-    public final String[] parts;
-    public final UserAgent userAgent;
+    java.util.Locale locale = Locale.US; // локаль для времени
+    public final String line; // вся строка лога
+    public final String ipAddr; // IP из строки
+    public final LocalDateTime time; // Дата-время
+    public final HttpMethod method;  // метод запроса
+    public final String path; // путь запроса
+    public  final int responseCode; // код ответа
+    public final String referer; //объем ответа
+    public final String[] parts; // разбиение строки на массив
+    public final UserAgent userAgent; // операционная система и браузер
 
     public LogEntry(String line) {
         this(line, "", null,null,"", 0, "", null);

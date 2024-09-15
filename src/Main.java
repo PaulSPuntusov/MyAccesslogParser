@@ -1,9 +1,9 @@
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Main {
     static ArrayList<LogEntry> str = new ArrayList();
+    static Statistics statistics = new Statistics();
 
     public static void main(String[] args) throws IOException {
         String path = "C:\\Users\\pps_r\\IdeaProjects\\AccessLogParser\\access.log";
@@ -35,14 +35,14 @@ public class Main {
             int i = 0;
             while ((line = reader.readLine()) != null) {
                 str.add(new LogEntry(line));
-                System.out.println(((LogEntry) str.get(i)).ip() +
-                        "..." + ((LogEntry) str.get(i)).ldt() +
-                        "..." + ((LogEntry) str.get(i)).meth() +
-                        "..." + ((LogEntry) str.get(i)).path() +
-                        "..." + ((LogEntry) str.get(i)).responseCode() +
-                        "..." + ((LogEntry) str.get(i)).referer()+
-                        "..." + ((LogEntry) str.get(i)).userAgent());
-
+                // statistics = statistics.addEntry();
+                System.out.println((str.get(i)).ip() +
+                        "..." + ( str.get(i)).ldt() +
+                        "..." + ( str.get(i)).meth() +
+                        "..." + ( str.get(i)).path() +
+                        "..." + ( str.get(i)).responseCode() +
+                        "..." + ( str.get(i)).referer()+
+                        "..." + (str.get(i)).userAgent());
                 if (line.matches(".*Mozilla.*")) {
                     ++countMozilla;
                 }
@@ -63,7 +63,7 @@ public class Main {
                     length = line.length();
                     ++count;
                     ++i;
-                } catch (RuntimeException var14) {
+                } catch (RuntimeException var1024) {
                     System.out.println("String must be shorter than 1024 characters");
                 }
             }
@@ -73,7 +73,7 @@ public class Main {
             System.out.println("Число вхождений Yandexbot:" + countYandexbot);
             System.out.println("Доля запросов от Гуглоботов:" + (double) countGooglebot / countMozilla);
             System.out.println("Доля запросов от Яндексботов:" + (double) countYandexbot / countMozilla);
-
+            //System.out.println(Statistics.);
         }
 
     }
