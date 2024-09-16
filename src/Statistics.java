@@ -23,7 +23,7 @@ public class Statistics {
     public LocalDateTime getMaxTime() {
         return maxTime;
     }
-    public static double getTrafficRate(){
+    public static long getTrafficRate(){
         long res;
         res = Duration.between(minTime,maxTime).toHours();
         res = totalTraffic/res;
