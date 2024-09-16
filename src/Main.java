@@ -26,6 +26,8 @@ public class Main {
             } catch (FileNotFoundException ffe) {
                 System.out.println("FileNotFound");
             }
+
+
             String line;
             int count = 0;
             int countMozilla = 0;
@@ -33,20 +35,21 @@ public class Main {
             int countYandexbot = 0;
             int length = 0;
             int i = 0;
-            line = reader.readLine();
-            LogEntry le = new LogEntry(line);
-            statistics.minTime = le.ldt();
-            statistics.maxTime = le.ldt();
             while ((line = reader.readLine()) != null) {
+                System.out.println(line);
                 str.add(new LogEntry(line));
+                if(i==0){
+                    statistics.minTime = str.get(i).ldt();
+                    statistics.maxTime = str.get(i).ldt();
+                }
                 Statistics.addEntry(str.get(i));
                 System.out.println((str.get(i)).ip() +
-                        "..." + ( str.get(i)).ldt() +
-                        "..." + ( str.get(i)).meth() +
-                        "..." + ( str.get(i)).path() +
-                        "..." + ( str.get(i)).responseCode() +
-                        "..." + ( str.get(i)).referer()+
-                        "..." + (str.get(i)).userAgent());
+                        " " + ( str.get(i)).ldt() +
+                        " " + ( str.get(i)).meth() +
+                        " " + ( str.get(i)).path() +
+                        " " + ( str.get(i)).responseCode() +
+                        " " + ( str.get(i)).referer()+
+                        " " + (str.get(i)).userAgent());
                 if (line.matches(".*Mozilla.*")) {
                     ++countMozilla;
                 }
