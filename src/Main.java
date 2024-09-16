@@ -33,6 +33,10 @@ public class Main {
             int countYandexbot = 0;
             int length = 0;
             int i = 0;
+            line = reader.readLine();
+            LogEntry le = new LogEntry(line);
+            statistics.minTime = le.ldt();
+            statistics.maxTime = le.ldt();
             while ((line = reader.readLine()) != null) {
                 str.add(new LogEntry(line));
                 Statistics.addEntry(str.get(i));
@@ -73,8 +77,10 @@ public class Main {
             System.out.println("Число вхождений Yandexbot:" + countYandexbot);
             System.out.println("Доля запросов от Гуглоботов:" + (double) countGooglebot / countMozilla);
             System.out.println("Доля запросов от Яндексботов:" + (double) countYandexbot / countMozilla);
-            System.out.println(Statistics.getTotalTraffic());
-            System.out.println(Statistics.maxTime);
+            System.out.println("Суммарный траффик: "+Statistics.getTotalTraffic());
+            System.out.println("Начало лога: "+Statistics.minTime);
+            System.out.println("Конец лога: "+Statistics.maxTime);
+            System.out.println("Средний траффик: "+Statistics.getTrafficRate());
         }
     }
 }
