@@ -35,7 +35,7 @@ public class Main {
             int i = 0;
             while ((line = reader.readLine()) != null) {
                 str.add(new LogEntry(line));
-                // statistics = statistics.addEntry();
+                Statistics.addEntry(str.get(i));
                 System.out.println((str.get(i)).ip() +
                         "..." + ( str.get(i)).ldt() +
                         "..." + ( str.get(i)).meth() +
@@ -73,8 +73,8 @@ public class Main {
             System.out.println("Число вхождений Yandexbot:" + countYandexbot);
             System.out.println("Доля запросов от Гуглоботов:" + (double) countGooglebot / countMozilla);
             System.out.println("Доля запросов от Яндексботов:" + (double) countYandexbot / countMozilla);
-            //System.out.println(Statistics.);
+            System.out.println(Statistics.getTotalTraffic());
+            System.out.println(Statistics.maxTime);
         }
-
     }
 }

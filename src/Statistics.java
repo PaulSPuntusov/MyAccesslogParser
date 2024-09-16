@@ -1,17 +1,17 @@
 import java.time.LocalDateTime;
 
 public class Statistics {
-    static int totalTraffic=0;
+    static Double totalTraffic=0.;
     static LocalDateTime minTime,maxTime;
     public Statistics() {
     }
-    public void addEntry(LogEntry le){
-       totalTraffic += Integer.parseInt(le.referer);
-       if (minTime.isAfter(le.time)){minTime=le.time;};
-       if (le.time.isAfter(maxTime)){maxTime=le.time;}
+    public static void addEntry(LogEntry le){
+       totalTraffic += Double.parseDouble(le.referer);
+       if (minTime.compareTo(le.time)>0){minTime=le.time;};
+       if (le.time.compareTo(maxTime)>0){maxTime=le.time;}
     }
 
-    public int getTotalTraffic() {
+    public static Double getTotalTraffic() {
         return totalTraffic;
     }
 
