@@ -60,7 +60,7 @@ public class LogEntry {
         return dl;
     }
 
-    // распарсил метод
+    // распарсил метод  - забираем метод обращения
     public HttpMethod meth() {
         String str;
         Pattern p = Pattern.compile("[\"](\\S+)"); // нагуглил исходно такую регулярку: "[(\\[{](.*?)[)\\]}]"
@@ -89,14 +89,16 @@ public class LogEntry {
                 return HttpMethod.GET;
         }
     }
-    //неудачная попытка распарсить путь
+    //возвращает путь
     public String path(){
         String str = parts[10]+parts[6];
         return str;
     }
+    // возвращает код ответа
     public int responseCode(){
         return parseInt(parts[8]);
     }
+    // возвращает траффик
     public String referer(){
         return parts[9];
     }

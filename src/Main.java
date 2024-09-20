@@ -36,13 +36,14 @@ public class Main {
             int length = 0;
             int i = 0;
             while ((line = reader.readLine()) != null) {
-                System.out.println(line);
+               // System.out.println(line);
                 str.add(new LogEntry(line));
                 if(i==0){
                     statistics.minTime = str.get(i).ldt();
                     statistics.maxTime = str.get(i).ldt();
                 }
                 Statistics.addEntry(str.get(i));
+                /*
                 System.out.println((str.get(i)).ip() +
                         " " + ( str.get(i)).ldt() +
                         " " + ( str.get(i)).meth() +
@@ -50,6 +51,8 @@ public class Main {
                         " " + ( str.get(i)).responseCode() +
                         " " + ( str.get(i)).referer()+
                         " " + (str.get(i)).userAgent());
+
+                 */
                 if (line.matches(".*Mozilla.*")) {
                     ++countMozilla;
                 }
@@ -84,6 +87,7 @@ public class Main {
             System.out.println("Начало лога: "+Statistics.minTime);
             System.out.println("Конец лога: "+Statistics.maxTime);
             System.out.println("Средний траффик: "+Statistics.getTrafficRate());
+            Statistics.siteList();
         }
     }
 }
