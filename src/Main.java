@@ -87,7 +87,8 @@ public class Main {
             System.out.println("Начало лога: "+Statistics.minTime);
             System.out.println("Конец лога: "+Statistics.maxTime);
             System.out.println("Средний траффик: "+Statistics.getTrafficRate());
-            Statistics.siteList();
+            //Statistics.siteList();
+            System.out.println(Statistics.osStatistics);
         }
     }
 }

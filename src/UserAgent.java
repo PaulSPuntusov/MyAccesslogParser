@@ -32,7 +32,7 @@ public class UserAgent {
     }
 
     public String Browser() {
-        String strBrowser = "нет";
+        String strBrowser = "нет никакой";
         if (line.matches(".*Edge.*")) {
             strBrowser = "Edge";
         }
