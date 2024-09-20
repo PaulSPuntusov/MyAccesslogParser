@@ -89,6 +89,7 @@ public class Main {
             System.out.println("Средний траффик: "+Statistics.getTrafficRate());
             //Statistics.siteList();
             System.out.println(Statistics.osStatistics);
+            System.out.println(Statistics.osTotalStatistics);
         }
     }
 }
