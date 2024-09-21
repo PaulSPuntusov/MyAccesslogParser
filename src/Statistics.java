@@ -32,6 +32,7 @@ public class Statistics {
             count = osStatistics.get(le.userAgent.os);
             osStatistics.replace(le.userAgent.os,++count);
             totalCount++;
+            System.out.println("% "+((double)count/totalCount));
             osTotalStatistics.replace(le.userAgent.os,((double)count/totalCount));
             System.out.println(osStatistics);
             System.out.println(osTotalStatistics);
@@ -39,7 +40,7 @@ public class Statistics {
         if(!osStatistics.containsKey(le.userAgent.os)){
             osStatistics.put(le.userAgent.os,1);
             totalCount++;
-            osTotalStatistics.replace(le.userAgent.os,((double)count/totalCount));
+            osTotalStatistics.put(le.userAgent.os,((double)count/totalCount));
         }
 
 
