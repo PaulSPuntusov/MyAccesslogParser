@@ -88,8 +88,8 @@ public class Main {
             System.out.println("Конец лога: "+Statistics.maxTime);
             System.out.println("Средний траффик: "+Statistics.getTrafficRate());
             //Statistics.siteList();
-            System.out.println(Statistics.osStatistics);
-            System.out.println(Statistics.osTotalStatistics);
+            System.out.println( "Общее количество ОС: "+Statistics.osStatistics);
+            System.out.println("Количество ОС в долях от общего количества запросов: "+Statistics.osTotalStatistics);
         }
     }
 }
