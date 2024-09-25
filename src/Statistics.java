@@ -4,7 +4,9 @@ import java.util.HashMap;
 import java.util.HashSet;
 
 public class Statistics {
-    static long totalTraffic = 0;
+    static long totalTraffic = 0; //счетчик общего траффика
+    static long trafficNoBots = 0; //счетчик траффика без ботов
+    static long failRequestCount = 0; // счетчик траффика с возвращенной ошибкой
     static int osTotalCount = 0; // счетчик общего количества операционных систем
     static int browserTotalCount = 0; // счетчик браузеров
     static LocalDateTime minTime, maxTime;
@@ -14,13 +16,20 @@ public class Statistics {
     static HashSet<String> siteNotExist = new HashSet<>(); // возвращает список несуществующих страниц
     static HashMap<String ,Integer> browserStatistics = new HashMap<>(); // возвращает набор браузеров
     static HashMap<String,Double> browserTotalStatistics = new HashMap<>(); //возвращает нвбор браузеров в % содержании
-
+    static HashSet<String> uniqIp = new HashSet<>(); // возвращает уникальные IP
     public Statistics() {
     }
 
     public static void addEntry(LogEntry le) {
         int count = 0; // счетчик операционных систем
-        totalTraffic += Long.parseLong(le.referer);
+        totalTraffic += Long.parseLong(le.referer); //считаем общий траффик
+        if(!le.userAgent.isBot()){
+            trafficNoBots += Long.parseLong(le.referer); //считаем траффик без ботов
+            uniqIp.add(le.ipAddr); //собираем уникальные IP адреса (не боты)
+        }
+        if (le.responseCode > 399) {
+            failRequestCount++; //считаем количество возвращенных ошибок
+        }
         if (minTime.compareTo(le.time) > 0) {
             minTime = le.time;
         }
@@ -73,15 +82,27 @@ public class Statistics {
     }
 
     public static long getTotalTraffic() {
-        return totalTraffic;
+        return totalTraffic; // считаем общий траффик
+    }
+    public static long duration(){
+        return (Duration.between(minTime, maxTime).toHours()); //считаем общее время лога
     }
 
 
     public static long getTrafficRate() {
-        long res;
-        res = Duration.between(minTime, maxTime).toHours();
-        res = totalTraffic / res;
-        return res;
+        return (totalTraffic / duration()); //возвращаем средний траффик
     }
+    public static long getTrafficRateNoBot(){
+        return (trafficNoBots/duration()); //возвращаем средний траффик без ботов
+    }
+    public static double getFailRequestRate(){
+        System.out.println("Время "+duration()+"/"+"Количество упавших запросов "+failRequestCount);
+        return (duration()/failRequestCount); // возвращаем среднее количество ошибок за час
+    }
+    public static long getAttendance(){
+        return (trafficNoBots/uniqIp.size());
+    }
+
+
 
 }

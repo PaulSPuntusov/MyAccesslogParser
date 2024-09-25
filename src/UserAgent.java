@@ -62,6 +62,9 @@ public class UserAgent {
         }
         return strBrowser;
     }
+    public boolean isBot(){
+            return (line.matches(".*bot.*"));
+    }
 
     @Override
     public String toString() {

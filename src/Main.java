@@ -92,6 +92,9 @@ public class Main {
             System.out.println("Количество ОС в долях от общего количества запросов: "+Statistics.osTotalStatistics);
             System.out.println("Количество браузеров в долях от общего количества запросов: "+Statistics.browserTotalStatistics);
             System.out.println("Получали 404 на запросы: "+ Statistics.siteNotExist);
+            System.out.println("Среднее количество посещений за час (без ботов): "+Statistics.getTrafficRateNoBot());
+            System.out.println("Количество ошибочных запросов в час: "+Statistics.getFailRequestRate());
+            System.out.println(("Средняя посещаемость одним пользователем: "+Statistics.getAttendance()));
         }
     }
 }
