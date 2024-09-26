@@ -38,7 +38,7 @@ public class Statistics {
                 System.out.println(time+" "+i);
             }
             if(time==oldtime){
-                attendanceStatistics.put(time,++i);
+                attendanceStatistics.put(time,i++);
                 System.out.println(time+" "+i);
             }
 
