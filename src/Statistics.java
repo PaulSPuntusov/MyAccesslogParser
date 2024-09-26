@@ -1,5 +1,4 @@
-import java.time.Duration;
-import java.time.LocalDateTime;
+import java.time.*;
 import java.util.HashMap;
 import java.util.HashSet;
 
@@ -18,16 +17,31 @@ public class Statistics {
     static HashMap<String ,Integer> browserStatistics = new HashMap<>(); // возвращает набор браузеров
     static HashMap<String,Double> browserTotalStatistics = new HashMap<>(); //возвращает нвбор браузеров в % содержании
     static HashSet<String> uniqIp = new HashSet<>(); // возвращает уникальные IP
+    static HashMap<Integer,Integer> attendanceStatistics = new HashMap<>(); // возвращает посекундную статистику посещений
     public Statistics() {
     }
 
     public static void addEntry(LogEntry le) {
         int count = 0; // счетчик операционных систем
+        int oldtime = 0; // счетчик начального времени
+        int i = 1; // счетчик запросов в секунду
         totalTraffic += Long.parseLong(le.referer); //считаем общий траффик
         if(!le.userAgent.isBot()){
             trafficNoBots += Long.parseLong(le.referer); //считаем траффик без ботов
             uniqIp.add(le.ipAddr); //собираем уникальные IP адреса (не боты)
             attendance++;
+            int time = le.time.getDayOfYear()*24*3600+le.time.getHour()*3600+le.time.getMinute()*60+le.time.getSecond();// счетчик времени
+            if(time!=oldtime){
+                i = 1;
+                oldtime = time;
+                attendanceStatistics.put(time,i);
+                System.out.println(time+" "+i);
+            }
+            if(time==oldtime){
+                attendanceStatistics.put(time,++i);
+                System.out.println(time+" "+i);
+            }
+
         }
         if (le.responseCode > 399) {
             failRequestCount++; //считаем количество возвращенных ошибок
