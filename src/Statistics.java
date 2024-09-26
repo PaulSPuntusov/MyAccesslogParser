@@ -9,6 +9,7 @@ public class Statistics {
     static long failRequestCount = 0; // счетчик траффика с возвращенной ошибкой
     static int osTotalCount = 0; // счетчик общего количества операционных систем
     static int browserTotalCount = 0; // счетчик браузеров
+    static int attendance = 0; // счетчик количества посещений не ботами
     static LocalDateTime minTime, maxTime;
     static HashSet<String> siteExist = new HashSet<>(); // возвращает набор страниц
     static HashMap<String, Integer> osStatistics = new HashMap<>(); // возвращает набор операционных систем
@@ -26,6 +27,7 @@ public class Statistics {
         if(!le.userAgent.isBot()){
             trafficNoBots += Long.parseLong(le.referer); //считаем траффик без ботов
             uniqIp.add(le.ipAddr); //собираем уникальные IP адреса (не боты)
+            attendance++;
         }
         if (le.responseCode > 399) {
             failRequestCount++; //считаем количество возвращенных ошибок
@@ -93,14 +95,14 @@ public class Statistics {
         return (totalTraffic / duration()); //возвращаем средний траффик
     }
     public static long getTrafficRateNoBot(){
-        return (trafficNoBots/duration()); //возвращаем средний траффик без ботов
+        return (attendance/duration()); //возвращаем средний траффик без ботов
     }
     public static double getFailRequestRate(){
-        System.out.println("Время "+duration()+"/"+"Количество упавших запросов "+failRequestCount);
-        return (duration()/failRequestCount); // возвращаем среднее количество ошибок за час
+        System.out.println("Количество упавших запросов "+failRequestCount+"/"+"Время "+duration());
+        return (failRequestCount/duration()); // возвращаем среднее количество ошибок за час
     }
     public static long getAttendance(){
-        return (trafficNoBots/uniqIp.size());
+        return (attendance/uniqIp.size()); //средняя посещаемость одним пользователем
     }
 
 

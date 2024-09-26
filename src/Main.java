@@ -95,6 +95,7 @@ public class Main {
             System.out.println("Среднее количество посещений за час (без ботов): "+Statistics.getTrafficRateNoBot());
             System.out.println("Количество ошибочных запросов в час: "+Statistics.getFailRequestRate());
             System.out.println(("Средняя посещаемость одним пользователем: "+Statistics.getAttendance()));
+            System.out.println("Количество уникальных пользователей: "+Statistics.uniqIp.size());
         }
     }
 }
