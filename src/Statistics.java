@@ -24,13 +24,14 @@ public class Statistics {
     static HashMap<String, Double> browserTotalStatistics = new HashMap<>(); //возвращает нвбор браузеров в % содержании
     static HashSet<String> uniqIp = new HashSet<>(); // возвращает уникальные IP
     static HashMap<Integer, Integer> attendanceStatistics = new HashMap<>(); // возвращает посекундную статистику посещений
+    static HashMap<String,Integer> userAttendance = new HashMap<>();// возвращает посещаемость одним юзером
     static HashSet<String> sites = new HashSet<>(); // собираем сайты в кучку
 
     public Statistics() {
     }
 
     public static void addEntry(LogEntry le) {
-
+        int j = 1;// счетчик посещений уникальным юзером
         totalTraffic += Long.parseLong(le.referer); //считаем общий траффик
         if (!le.userAgent.isBot()) {
             trafficNoBots += Long.parseLong(le.referer); //считаем траффик без ботов
@@ -47,6 +48,11 @@ public class Statistics {
                 attendanceStatistics.put(time, i);
                 //System.out.println(time+" "+i);
             }
+            if(!userAttendance.containsKey(le.ip())){
+                userAttendance.put(le.ip(),1);
+            } else if(userAttendance.containsKey(le.ip())){
+                userAttendance.put(le.ip(),(userAttendance.get(le.ip())+1));
+            }
         }
         if (le.responseCode > 399) {
             failRequestCount++; //считаем количество возвращенных ошибок
@@ -60,10 +66,10 @@ public class Statistics {
         }
         if (le.responseCode == 200) {
             siteExist.add(le.path);// пример https://www.nova-news.ru//cooking/?rss=1&p=53&lg=1
-            Pattern p = Pattern.compile("https://([^/]+)/"); // https://www.nova-news.ru//cooking/?rss=1&p=53&lg=1]}]"
+            Pattern p = Pattern.compile("https://([^/]+)/"); // забираем сайт из строки
             Matcher m = p.matcher(le.parts[10]);
             if(m.find()){
-                System.out.println(m.group(1));
+                //System.out.println(m.group(1));
                 sites.add(m.group(1));
             }
 
@@ -139,5 +145,8 @@ public class Statistics {
 
     public static Integer peakAttendance() {
         return attendanceStatistics.values().stream().max(Integer::compare).get();
+    }
+    public static Integer maxAttendance(){
+        return userAttendance.values().stream().max(Integer::compare).get();
     }
 }

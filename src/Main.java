@@ -98,6 +98,7 @@ public class Main {
             System.out.println("Количество уникальных пользователей: "+Statistics.uniqIp.size());
             System.out.println("Пиковое кол-во запросов в секунду: "+Statistics.peakAttendance());
             System.out.println(("Ссылки с сайтов: "+Statistics.sites));
+            System.out.println("максимальная посещаемость одним юзером: "+ Statistics.maxAttendance());
         }
     }
 }
