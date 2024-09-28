@@ -59,11 +59,15 @@ public class Statistics {
             maxTime = le.time;
         }
         if (le.responseCode == 200) {
-            siteExist.add(le.path);
-            Pattern p = Pattern.compile("[(\\\\](.*?)[)\\\\]"); // нагуглил исходно такую регулярку: "[(\\[{](.*?)[)\\]}]"
+            siteExist.add(le.path);// пример https://www.nova-news.ru//cooking/?rss=1&p=53&lg=1
+            Pattern p = Pattern.compile("https://([^/]+)/"); // https://www.nova-news.ru//cooking/?rss=1&p=53&lg=1]}]"
             Matcher m = p.matcher(le.parts[10]);
-            System.out.println(m.find() ? m.group() : "Not found");
-            sites.add(le.parts[10]);
+            if(m.find()){
+                System.out.println(m.group(1));
+                sites.add(m.group(1));
+            }
+
+
         }
         if (le.responseCode == 404) {
             siteNotExist.add(le.path);
