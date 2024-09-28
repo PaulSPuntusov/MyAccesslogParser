@@ -2,6 +2,8 @@ import java.time.*;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Optional;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Statistics {
     static int count = 0; // счетчик операционных систем
@@ -22,6 +24,7 @@ public class Statistics {
     static HashMap<String, Double> browserTotalStatistics = new HashMap<>(); //возвращает нвбор браузеров в % содержании
     static HashSet<String> uniqIp = new HashSet<>(); // возвращает уникальные IP
     static HashMap<Integer, Integer> attendanceStatistics = new HashMap<>(); // возвращает посекундную статистику посещений
+    static HashSet<String> sites = new HashSet<>(); // собираем сайты в кучку
 
     public Statistics() {
     }
@@ -57,6 +60,10 @@ public class Statistics {
         }
         if (le.responseCode == 200) {
             siteExist.add(le.path);
+            Pattern p = Pattern.compile("[(\\\\](.*?)[)\\\\]"); // нагуглил исходно такую регулярку: "[(\\[{](.*?)[)\\]}]"
+            Matcher m = p.matcher(le.parts[10]);
+            System.out.println(m.find() ? m.group() : "Not found");
+            sites.add(le.parts[10]);
         }
         if (le.responseCode == 404) {
             siteNotExist.add(le.path);

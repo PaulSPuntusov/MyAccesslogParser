@@ -97,6 +97,7 @@ public class Main {
             System.out.println(("Средняя посещаемость одним пользователем: "+Statistics.getAttendance()));
             System.out.println("Количество уникальных пользователей: "+Statistics.uniqIp.size());
             System.out.println("Пиковое кол-во запросов в секунду: "+Statistics.peakAttendance());
+            System.out.println(("Ссылки с сайтов: "+Statistics.sites));
         }
     }
 }

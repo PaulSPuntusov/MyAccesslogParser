@@ -92,6 +92,7 @@ public class LogEntry {
     //возвращает путь
     public String path(){
         String str = parts[10]+parts[6];
+        //System.out.println(parts[10]);
         return str;
     }
     // возвращает код ответа
